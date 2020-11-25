@@ -1,5 +1,5 @@
 # SelfText Beyond Polygon: Unconstrained Text Detection with Box Supervisionand Dynamic Self-Training
-![Alt text](https://github.com/weijiawu/Unconstrained-Text-Detection-with-Box-Supervisionand-Dynamic-Self-Training/tree/main/image/1606325537.png)
+![Alt text](https://user-images.githubusercontent.com/40711216/100269392-69fec600-2f91-11eb-8225-735d435caf58.png)
 ### Introduction
 &#160;&#160;&#160;&#160; &#160;&#160;This is a project concerning SelfText Beyond Polygon: Unconstrained Text Detection with Box Supervisionand Dynamic Self-Training
 
