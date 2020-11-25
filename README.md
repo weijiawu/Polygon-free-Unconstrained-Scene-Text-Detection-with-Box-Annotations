@@ -1,5 +1,5 @@
 # SelfText Beyond Polygon: Unconstrained Text Detection with Box Supervisionand Dynamic Self-Training
-![Alt text](https://github.com/weijiawu/Synthetic-to-Real-Unsupervised-Domain-Adaptation-for-Scene-Text-Detection-in-the-Wild/tree/master/image/1598619033(1).png)
+![Alt text](https://github.com/weijiawu/Unconstrained-Text-Detection-with-Box-Supervisionand-Dynamic-Self-Training/tree/main/image/1606325537(1).png)
 ### Introduction
 &#160;&#160;&#160;&#160; &#160;&#160;This is a project concerning SelfText Beyond Polygon: Unconstrained Text Detection with Box Supervisionand Dynamic Self-Training
 
@@ -21,13 +21,15 @@ Supported:
 - [x] sythtext800K
 - [x] TotalText
 - [x] MSRA-TD500
+- [ ] CTW1500
+
 
 ## model zoo
 
 Supported text detection:
 - [x] EAST [EAST: An Efficient and Accurate Scene Text Detector](https://arxiv.org/abs/1704.03155)
 - [x] Psenet [Shape Robust Text Detection with Progressive Scale Expansion Network](https://arxiv.org/abs/1903.12473)
-- [] DB
+- [ ] DB
 
 
 ## Train
