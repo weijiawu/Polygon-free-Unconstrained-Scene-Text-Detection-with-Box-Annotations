@@ -15,6 +15,14 @@ From more details,please refer to our arXiv paper.(TDB)
 - Pillow
 - numpy
 
+## ToDo List
+- [x] Release code
+- [ ] Document for Installation
+- [ ] Document for testing and training
+- [ ] Evaluation
+- [ ] Demo script
+- [ ] re-organize and clean the parameters
+
 ## Dataset
 Supported:
 - [x] ICDAR15
