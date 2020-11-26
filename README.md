@@ -31,19 +31,50 @@ Supported text detection:
 - [x] Psenet [Shape Robust Text Detection with Progressive Scale Expansion Network](https://arxiv.org/abs/1903.12473)
 - [ ] DB
 
+## Bounding Box Supervision(BBS)
 
-## Train
-Our experiments are based on one machine with 2 2080ti(16g memory).
+### Train
 
+The training strategy includes three steps: 
+(1) training SASN with synthetic data 
+(2) generating pseudo label on real data based on bounding box annotation with SASN
+(3) training the detectors(EAST and PSENet) with the pseudo label
+
+#### training SASN with [synthtext](https://github.com/ankush-me/SynthText) or [curved synthtext](https://github.com/PkuDavidGuan/CurvedSynthText) 
 ```
 (TDB)
 ```
 
-## Eval
+#### generating pseudo label on real data with SASN
+```
+(TDB)
+```
+
+#### training EAST or PSENet with the pseudo label
+```
+(TDB)
+```
+
+### Eval
 for example (batchsize=2)
 ```
 (TDB)
 ```
+### Visualization
+
+
+## Dynamic Self Training
+### Train
+```
+(TDB)
+```
+
+### Eval
+for example (batchsize=2)
+```
+(TDB)
+```
+### Visualization
 
 
 ## Experiments
