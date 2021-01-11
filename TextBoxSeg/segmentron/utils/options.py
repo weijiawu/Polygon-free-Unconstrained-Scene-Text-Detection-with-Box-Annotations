@@ -2,7 +2,7 @@ import argparse
 
 def parse_args():
     parser = argparse.ArgumentParser(description='Segmentron')
-    parser.add_argument('--config-file',default="../configs/textseg_total.yaml", metavar="FILE",
+    parser.add_argument('--config-file',default="../configs/textseg.yaml", metavar="FILE",
                         help='config file path')
     # cuda setting
     parser.add_argument('--no-cuda', action='store_true', default=False,

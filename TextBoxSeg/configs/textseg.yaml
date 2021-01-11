@@ -1,21 +1,24 @@
 DATASET:
-    ROOT: "data/st800k_crop"
-    NAME: "st800k"
+    ROOT: "/mnt/lustre/share_data/xieenze/wuweijia/CurvedSynthText/SegData/"
+    # st800k_attention , st800k_total
+    NAME: "st800k_attention"
     MEAN: [0.485, 0.456, 0.406]
     STD: [0.229, 0.224, 0.225]
 TRAIN:
-    EPOCHS: 16
-    BATCH_SIZE: 8
-    BASE_SIZE: (128,32)
-    MODEL_SAVE_DIR: 'workdirs/debug'
+    EPOCHS: 100
+    BATCH_SIZE: 24
+    BASE_SIZE: (128,128)  # (160,96)  or  (128,128)
+    MODEL_SAVE_DIR: '../workdirs/'
+
 TEST:
     BATCH_SIZE: 1
-    TEST_MODEL_PATH: 'workdirs/debug/16.pth'
+    TEST_MODEL_PATH: '../workdirs/50_attention.pth'
 
 SOLVER:
     LR: 0.02
 
 MODEL:
-    MODEL_NAME: "TextSeg"
+#    model_name  textseg_attention  or  TextSeg
+    MODEL_NAME: "textseg_attention"
     BACKBONE: "resnet50"
 
