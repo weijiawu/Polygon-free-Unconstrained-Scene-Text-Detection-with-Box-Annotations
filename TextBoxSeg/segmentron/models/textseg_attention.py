@@ -195,8 +195,7 @@ class FusHead(nn.Module):
         atted_c = c * att_map
         x = torch.cat([c, atted_c], 1)#512
         x = self.conv1(x) #256
-
-        weight = F.avg_pool2d(x, x.size(2))
+        weight = F.avg_pool2d(x, (x.size(2),x.size(3)))
         weight = F.relu(self.fc1(weight))
         weight = torch.sigmoid(self.fc2(weight))
         x = x * weight

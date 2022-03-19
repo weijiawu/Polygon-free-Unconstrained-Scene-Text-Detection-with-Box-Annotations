@@ -10,12 +10,12 @@ from segmentron.data.dataloader.seg_data_base import SegmentationDataset_total
 import cv2
 
 class TextSegmentation_attention(SegmentationDataset_total):
-    """Trans10K Semantic Segmentation Dataset.
+    """Text Segmentation Dataset.
 
     Parameters
     ----------
     root : string
-        Path to Trans10K folder. Default is './datasets/Trans10K'
+        Path to Sagement folder. Default is './datasets/Trans10K'
     split: string
         'train', 'validation', 'test'
     transform : callable, optional
@@ -24,7 +24,7 @@ class TextSegmentation_attention(SegmentationDataset_total):
     BASE_DIR = 'st800k'
     NUM_CLASS = 2
 
-    def __init__(self, root='data/st800k_crop', split='train', mode=None, transform=None, debug=False, **kwargs):
+    def __init__(self, root='data/st800k_crop', split='train', mode=None, transform=None, debug=True, **kwargs):
         super(TextSegmentation_attention, self).__init__(root, split, mode, transform, **kwargs)
         assert os.path.exists(self.root), "Please put dataset in {}".format(root)
         self.images, self.mask_paths = _get_st800kcrop_pairs(self.root, self.split)
@@ -49,10 +49,12 @@ class TextSegmentation_attention(SegmentationDataset_total):
         try:
             # index = random.randint(10000)
             img = Image.open(self.images[index]).convert('RGB')
+            mask = Image.open(self.mask_paths[index])
             origin_h = img.height
             origin_w = img.width
             if origin_h > origin_w:
                 img = img.transpose(Image.ROTATE_90)  # 将图片旋转90度
+                mask = mask.transpose(Image.ROTATE_90)  # 将图片旋转90度
                 origin_h = img.height
                 origin_w = img.width
 
@@ -63,15 +65,13 @@ class TextSegmentation_attention(SegmentationDataset_total):
             if self.transform is not None:
                 img = self.transform(img)
             return img, os.path.basename(self.images[index])
-        mask = Image.open(self.mask_paths[index])
+
 
 
         dist_img = cv2.distanceTransform(np.array(mask), cv2.DIST_L1, cv2.DIST_MASK_3)
         # dist_back = cv2.distanceTransform((1-np.array(mask)), cv2.DIST_L1, cv2.DIST_MASK_3)
         dist_img_ = (dist_img / dist_img.max() * 0.7 + 0.3)
-        # dist_img[dist_img>0.5] = 1
-        # dist_img[dist_img<=0.5] = 0
-        # dist_img_ = np.clip(dist_img, 0, 1)
+
 
         if self.mode == 'train':
             img, mask, dist_img_ = self._sync_transform(img, mask, dist_img_)
@@ -82,23 +82,29 @@ class TextSegmentation_attention(SegmentationDataset_total):
             img, mask = self._img_transform(img), self._mask_transform(mask)
 
         if self.debug == True:
-            print('debug vis')
+            # print('debug vis')
             # _img = Image.fromarray(img)
             img = np.array(img)
+            mask_SHOW = np.array(mask).astype("int16")*255
+            mask_SHOW = mask_SHOW[:, :, np.newaxis]
+            mask_SHOW = mask_SHOW.repeat([3], axis=2)
+
+            dist_img_SHOW = np.array(dist_img_*255).astype("int16")
+            dist_img_SHOW = dist_img_SHOW[:, :, np.newaxis]
+            dist_img_SHOW = dist_img_SHOW.repeat([3], axis=2)
+
+            show = np.concatenate([img, mask_SHOW,dist_img_SHOW ], axis=1)
             print(img.shape)
-            cv2.imwrite('/home/xjc/Desktop/CVPR_SemiText/SemiText/TextBoxSeg/demo/trash/img6.jpg',np.array(img))
-            cv2.imwrite('/home/xjc/Desktop/CVPR_SemiText/SemiText/TextBoxSeg/demo/trash/mask6.png',np.array(mask).astype("int16")*255)
-            cv2.imwrite('/home/xjc/Desktop/CVPR_SemiText/SemiText/TextBoxSeg/demo/trash/skeleton6.png',np.array(dist_img_*255).astype("int16"))
-            # _img.save('/home/xjc/Desktop/CVPR_SemiText/SemiText/TextBoxSeg/demo/trash/img.jpg')
-            # _mask = Image.fromarray(mask.float().data.cpu().numpy()*255).convert('L')
-            # _mask.save('/home/xjc/Desktop/CVPR_SemiText/SemiText/TextBoxSeg/demo/trash/mask.jpg')
-            # _mask = Image.fromarray(dist_img * 255).convert('L')
-            # _mask.save('/home/xjc/Desktop/CVPR_SemiText/SemiText/TextBoxSeg/demo/trash/dist_img.jpg')
-            # raise NameError
+            cv2.imwrite('./show/img{}.jpg'.format(index),np.array(show))
+
         # synchrosized transform
 
 
         # general resize, normalize and toTensor
+        # print(img.shape, mask.shape, dist_img_.shape)
+        # if img.shape[0]!=128:
+        #     print(img.shape, mask.shape, dist_img_.shape)
+        #     print(self.images[index])
         if self.transform is not None:
             img = self.transform(img)
         return img, mask, dist_img_, (origin_h,origin_w),  self.images[index]
@@ -125,7 +131,7 @@ def _get_st800kcrop_pairs(folder, split='train'):
     def get_path_pairs(img_folder, mask_folder):
         img_paths = []
         mask_paths = []
-        imgs = os.listdir(img_folder)[:50]
+        imgs = os.listdir(img_folder)
 
         for imgname in imgs:
             imgpath = os.path.join(img_folder, imgname)

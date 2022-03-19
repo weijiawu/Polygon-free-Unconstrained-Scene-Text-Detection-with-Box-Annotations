@@ -5,6 +5,33 @@ import tarfile
 from six.moves import urllib
 from torch.utils.model_zoo import tqdm
 
+def read_lines(p):
+    """return the text in a file in lines as a list """
+    p = get_absolute_path(p)
+    f = open(p, 'rU', encoding='utf-8-sig')
+    return f.readlines()
+
+
+def remove_all(s, sub):
+    return replace_all(s, sub, '')
+
+def replace_all(s, old, new, reg=False):
+    if reg:
+        import re
+        targets = re.findall(old, s)
+        for t in targets:
+            s = s.replace(t, new)
+    else:
+        s = s.replace(old, new)
+    return s
+
+
+def get_absolute_path(p):
+    if p.startswith('~'):
+        p = os.path.expanduser(p)
+    return os.path.abspath(p)
+
+
 def gen_bar_updater():
     pbar = tqdm(total=None)
 

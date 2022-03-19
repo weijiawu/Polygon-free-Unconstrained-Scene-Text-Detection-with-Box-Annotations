@@ -22,10 +22,12 @@ def mask_image(image,mask_2d):
     # add_image = cv2.add(image, mask_3d_color)
 
     mask = (mask_2d!=0).astype(bool)
+
     mask_3d_color[mask_2d[:, :] == 1] = np.random.randint(0, 255, (1, 3), dtype=np.uint8)
     image[mask] = image[mask] * 0.5 + mask_3d_color[mask] * 0.5
 
     return image
+
 def read_mat_lindes(p):
     f = scipy.io.loadmat(p)
     return f
