@@ -57,11 +57,11 @@ def get_patchs(img, char_boxs):
 
 
 if __name__ == "__main__":
-    st800k_path = '/mnt/lustre/share_data/xieenze/wuweijia/CurvedSynthText'
-    save_path = '/mnt/lustre/share_data/xieenze/wuweijia/CurvedSynthText/SegData/'
+    st800k_path = '/data/data_weijiawu/CurvedSynthText/'
+    save_path = '/data/data_weijiawu/CurvedSynthText/SegData/'
     # print(len(os.listdir(os.path.join(save_path,"image"))))
     # raise NameError
-    max_num = 50000
+    max_num = 500000
     if not os.path.exists(save_path):
         os.makedirs(save_path)
     json_filename = '{}/Label.json'.format(st800k_path)
@@ -84,7 +84,7 @@ if __name__ == "__main__":
 
         file_number,_,image_name =  data["img"].split("/")
         file_number = file_number.zfill(4)
-        image_path = os.path.join(st800k_path,"images",file_number,image_name)
+        image_path = os.path.join(st800k_path,"img/images",file_number,image_name)
 
         if os.path.exists(image_path):
             image = readimg(image_path)
@@ -97,8 +97,8 @@ if __name__ == "__main__":
             img_path = os.path.join(save_path, 'image', '{}.png'.format(save_number))
             mask_path = os.path.join(save_path, 'mask', '{}.png'.format(save_number))
             # print(img_path)
-            # cv2.imwrite(img_path, patch_imgs)
-            # cv2.imwrite(mask_path, patch_masks)
+            cv2.imwrite(img_path, patch_imgs)
+            cv2.imwrite(mask_path, patch_masks)
             save_number += 1
             if save_number>= max_num:
                 break

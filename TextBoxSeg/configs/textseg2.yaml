@@ -1,0 +1,21 @@
+DATASET:
+    ROOT: "/data/glusterfs_cv_04/11121171/data/SynthText/"
+    NAME: "st800k"
+    MEAN: [0.485, 0.456, 0.406]
+    STD: [0.229, 0.224, 0.225]
+TRAIN:
+    EPOCHS: 50
+    BATCH_SIZE: 24
+    BASE_SIZE: (128,32)
+    MODEL_SAVE_DIR: '/data/glusterfs_cv_04/11121171/CVPR_Text/SemiText/TextBoxSeg/workdirs'
+TEST:
+    BATCH_SIZE: 1
+    TEST_MODEL_PATH: '/data/glusterfs_cv_04/11121171/CVPR_Text/SemiText/TextBoxSeg/workdirs/50_32.pth'
+
+SOLVER:
+    LR: 0.02
+
+MODEL:
+    MODEL_NAME: "TextSeg"
+    BACKBONE: "resnet50"
+

@@ -51,40 +51,66 @@ The training strategy includes three steps:
 (3) training the detectors(EAST and PSENet) with the pseudo label
 
 #### training SASN with [synthtext](https://github.com/ankush-me/SynthText) or [curved synthtext](https://github.com/PkuDavidGuan/CurvedSynthText) 
+Generate crop image, you should modify the file path in corresponding .py.
 ```
-(TDB)
+cd TextBoxSeg/demo
+python st800k_crop2.py   # Curved SynthText
+python curved_st800k_crop.py  # SynthText800k
+
 ```
 
-#### generating pseudo label on real data with SASN
+Train SASN, you should modify the data path in textseg2.yaml firstly.
 ```
-(TDB)
+sh tools/dist_train.sh configs/textseg2.yaml
 ```
 
-#### training EAST or PSENet with the pseudo label
+#### generating pseudo label on real data with SASN on ICDAR15 and TotalText
 ```
-(TDB)
+python3 tools/gen_ic15_pslabel.py --config-file configs/textseg2.yaml
 ```
+if you want to visualize these label, run the scrip:
+```
+python3 tools/demo_ic15.py --config-file configs/textseg2.yaml
+```
+
+```
+python3 tools/gen_tt_pslabel.py --config-file configs/textseg2.yaml
+```
+```
+python3 tools/demo_tt.py --config-file configs/textseg2.yaml
+```
+
+#### training EAST or PSENet with the pseudo label, don't forget to modify the corresponding data path
+Training EAST with the pseudo label
+```
+cd EAST_box_supervision
+python train_ICDAR15.py
+```
+Training PSENet with the pseudo label
+```
+cd PSENet_box_supervision
+python train_icdar15.py
+```
+
 
 ### Eval
-for example (batchsize=2)
+
+Test for PSENet  
 ```
-(TDB)
+cd PSENet_box_supervision
+python test_icdar15.py
 ```
+
+Test for EAST  
+```
+cd EAST_box_supervision
+python eval.py
+```
+
+
 ### Visualization
 
 
-## Dynamic Self Training
-### Train
-```
-(TDB)
-```
-
-### Eval
-for example (batchsize=2)
-```
-(TDB)
-```
-### Visualization
 
 
 ## Experiments
