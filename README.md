@@ -50,7 +50,7 @@ The training strategy includes three steps:
 (2) generating pseudo label on real data based on bounding box annotation with SASN
 (3) training the detectors(EAST and PSENet) with the pseudo label
 
-#### training SASN with [synthtext](https://github.com/ankush-me/SynthText) or [curved synthtext](https://github.com/PkuDavidGuan/CurvedSynthText) 
+#### training SASN with [synthtext](https://github.com/ankush-me/SynthText) or [curved synthtext](https://github.com/PkuDavidGuan/CurvedSynthText), or using the [weight](https://drive.google.com/file/d/1L2xmllTln9Smnfn5r_PGOoAkWnqKsXEw/view?usp=sharing) from us:
 Generate crop image, you should modify the file path in corresponding .py.
 ```
 cd TextBoxSeg/demo
@@ -72,11 +72,9 @@ if you want to visualize these label, run the scrip:
 ```
 python3 tools/demo_ic15.py --config-file configs/textseg2.yaml
 ```
-
+Similar for Total-Text
 ```
 python3 tools/gen_tt_pslabel.py --config-file configs/textseg2.yaml
-```
-```
 python3 tools/demo_tt.py --config-file configs/textseg2.yaml
 ```
 
