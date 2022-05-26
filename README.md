@@ -17,10 +17,9 @@ From more details,please refer to our arXiv [paper](https://arxiv.org/abs/2011.1
 
 ## ToDo List
 - [x] Release code(BBS)
-- [ ] Release code(DST)
-- [ ] Document for Installation
-- [ ] Document for testing and training
-- [ ] Evaluation
+- [x] Document for Installation
+- [x] Document for testing and training
+- [x] Evaluation
 - [ ] Demo script
 - [ ] re-organize and clean the parameters
 
@@ -31,7 +30,7 @@ Supported:
 - [x] sythtext800K
 - [x] TotalText
 - [x] MSRA-TD500
-- [ ] CTW1500
+- [x] CTW1500
 
 
 ## model zoo
