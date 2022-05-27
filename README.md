@@ -1,7 +1,7 @@
-# SelfText Beyond Polygon: Unconstrained Text Detection with Box Supervisionand Dynamic Self-Training
+# Polygon-free: Unconstrained Scene Text Detection with Box Annotations
 ![Alt text](https://user-images.githubusercontent.com/40711216/100269392-69fec600-2f91-11eb-8225-735d435caf58.png)
 ### Introduction
-This is a PyTorch implementation of "SelfText Beyond Polygon: Unconstrained Text Detection with Box Supervisionand Dynamic Self-Training"
+This is a PyTorch implementation of "Polygon-free: Unconstrained Scene Text Detection with Box Annotations"
 
 The paper propose a novel text detection system termed SelfText Beyond Polygon(SBP) with Bounding Box Supervision(BBS) and Dynamic Self Training~(DST), where training a polygon-based text detector with only a limited set of upright bounding box annotations. 
 As shown in the Figure, SBP achieves the same performance as strong supervision while saving huge data annotation costs.
